@@ -43,7 +43,7 @@ export class UserController {
   async createUser(@Body() data: any) {
     const user = await this.userService.createUser(data);
 
-    return { user, apiToken: user.apiToken };
+    return { user };
   }
 
   @UseGuards(AuthGuard)
