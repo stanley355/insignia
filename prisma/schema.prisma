@@ -12,7 +12,8 @@ datasource db {
 
 model Workspace {
   id        String   @id @default(cuid())
-  userId    String 
+  userId    String   @unique
+  user      User?     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -24,21 +25,24 @@ enum UserRoleEnum {
 
 model Session {
   id        String   @id @default(cuid())
-  userId    String 
+  userId    String   @unique
+  user      User?     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Account {
   id        String   @id @default(cuid())
-  userId    String 
+  userId    String   @unique
+  user      User?     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model ApiToken {
   id        String   @id @default(cuid())
-  userId    String
+  userId    String   @unique
+  user      User?     @relation(fields: [userId], references: [id])
   value     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -53,10 +57,10 @@ model User {
   emailverified   DateTime
   name            String
   password        String
-  workspace       Workspace 
+  workspace       Workspace? 
   workspaceId     String
   role            UserRoleEnum
-  session         Session
-  account         Account
-  api_token       ApiToken
+  session         Session?
+  account         Account?
+  api_token       ApiToken?
 }
