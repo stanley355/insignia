@@ -9,3 +9,54 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Workspace {
+  id        String   @id @default(cuid())
+  userId    String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum UserRoleEnum {
+  ADMIN
+  USER
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id        String   @id @default(cuid())
+  userId    String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ApiToken {
+  id        String   @id @default(cuid())
+  userId    String
+  value     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  lastActivityAt  DateTime @updatedAt
+  email           String   @unique
+  emailverified   DateTime
+  name            String
+  password        String
+  workspace       Workspace 
+  workspaceId     String
+  role            UserRoleEnum
+  session         Session
+  account         Account
+  api_token       ApiToken
+}
