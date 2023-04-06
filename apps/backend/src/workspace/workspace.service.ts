@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { Workspace, Prisma } from '@prisma/client';
 
 @Injectable()
-export class WorkspacesService {
+export class WorkspaceService {
   constructor(private prisma: PrismaService) {}
 
   async createWorkspace(data: Prisma.WorkspaceCreateInput): Promise<Workspace> {
