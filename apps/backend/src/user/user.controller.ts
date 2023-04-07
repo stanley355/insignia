@@ -11,8 +11,6 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { AuthGuard } from '../auth.guard';
-import bcrypt from 'bcrypt';
 
 @Controller('users')
 export class UserController {
@@ -44,24 +42,6 @@ export class UserController {
     const user = await this.userService.createUser(data);
 
     return { user };
-  }
-
-  @UseGuards(AuthGuard)
-  @Post('auth')
-  async authUser(@Body() data) {
-    const user = await this.userService.getUserById(data.id);
-
-    if (!user) {
-      throw new NotFoundException('User Not Found');
-    }
-
-    const isPasswordValid = await bcrypt.compare(data.password, user.password);
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    return { user, apiToken: user.apiToken };
   }
 
   @Delete(':id')

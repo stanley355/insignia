@@ -34,7 +34,7 @@ export class UserService {
         password: hashedPassword,
         workspace: "",
         workspaceId: "",
-        role: "ADMIN",
+        role: "USER",
         account: "",
         apiToken: uuidv4(), // generate a new uuidv4 as api token
       },
