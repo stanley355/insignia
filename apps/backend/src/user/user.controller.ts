@@ -6,9 +6,6 @@ import {
   Delete,
   Body,
   Param,
-  UseGuards,
-  NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 

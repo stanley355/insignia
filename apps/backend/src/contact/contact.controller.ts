@@ -6,9 +6,7 @@ import {
   Post,
   Put,
   Delete,
-  UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ContactService } from './contact.service';
 
 @Controller('contact')

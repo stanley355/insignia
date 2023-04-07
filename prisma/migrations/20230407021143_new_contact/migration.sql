@@ -1,8 +1,10 @@
 -- CreateTable
 CREATE TABLE "Contact" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -11,9 +13,9 @@ CREATE TABLE "Contact" (
 
 -- CreateTable
 CREATE TABLE "ContactList" (
-    "id" SERIAL NOT NULL,
-    "contactId" INTEGER NOT NULL,
-    "contactGroupId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "contactId" TEXT NOT NULL,
+    "contactGroupId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -22,7 +24,7 @@ CREATE TABLE "ContactList" (
 
 -- CreateTable
 CREATE TABLE "ContactGroup" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -32,6 +34,9 @@ CREATE TABLE "ContactGroup" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Contact_email_key" ON "Contact"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Contact_phoneNumber_key" ON "Contact"("phoneNumber");
 
 -- AddForeignKey
 ALTER TABLE "ContactList" ADD CONSTRAINT "ContactList_contactGroupId_fkey" FOREIGN KEY ("contactGroupId") REFERENCES "ContactGroup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
