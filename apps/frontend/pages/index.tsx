@@ -1,5 +1,6 @@
 import styles from './index.module.scss';
 
+
 export function Index() {
   /*
    * Replace the elements below with your own.
@@ -8,7 +9,7 @@ export function Index() {
    */
   return (
     <div className={styles.page}>
-      <div className="wrapper">
+      <div className="bg-black">
         <div className="container">
           <div id="welcome">
             <h1>
@@ -17,7 +18,7 @@ export function Index() {
             </h1>
           </div>
 
-          <div id="hero" className="rounded">
+          <div id="hero" className="rounded bg-black">
             <div className="text-container">
               <h2>
                 <svg
