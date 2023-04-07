@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { TokenMiddleware } from '../token-middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
@@ -12,4 +12,8 @@ import { ContactModule } from '../contact/contact.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(TokenMiddleware).forRoutes('*');
+  }
+}
