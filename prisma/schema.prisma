@@ -16,18 +16,45 @@ enum UserRoleEnum {
 }
 
 model User {
-  id             String      @id @default(uuid())
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  lastActivityAt DateTime    @updatedAt
-  email          String      @unique
+  id             String       @id @default(uuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  lastActivityAt DateTime     @updatedAt
+  email          String       @unique
   emailVerified  DateTime
   name           String
   password       String
   workspace      String
-  workspaceId    String     @unique
+  workspaceId    String       @unique
   role           UserRoleEnum
-  session        DateTime   @updatedAt
+  session        DateTime     @updatedAt
   account        String
   apiToken       String
+}
+
+model Contact {
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String        @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  ContactList ContactList[]
+}
+
+model ContactList {
+  id             Int          @id @default(autoincrement())
+  contactId      Int
+  contactGroup   ContactGroup @relation(fields: [contactGroupId], references: [id])
+  contactGroupId Int
+  contact        Contact      @relation(fields: [contactId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model ContactGroup {
+  id          Int           @id @default(autoincrement())
+  name        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  ContactList ContactList[]
 }

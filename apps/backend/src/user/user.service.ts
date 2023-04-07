@@ -32,6 +32,10 @@ export class UserService {
         emailVerified: new Date(),
         name: data.name,
         password: hashedPassword,
+        workspace: "",
+        workspaceId: "",
+        role: "ADMIN",
+        account: "",
         apiToken: uuidv4(), // generate a new uuidv4 as api token
       },
     });
