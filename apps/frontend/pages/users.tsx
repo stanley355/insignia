@@ -7,7 +7,8 @@ const UsersPage = ({ users }) => {
       `${process.env.NEXT_PUBLIC_FRONTEND_URL}api/users/?id=${userID}`
     );
 
-    if (res && res.data) {
+    if (res) {
+      alert("Hapus berhasil");
       window.location.reload();
     } else {
       alert('Hapus gagal');

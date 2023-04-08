@@ -5,8 +5,6 @@ import bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
-
-
   async getAllUsers() {
     const prisma = new PrismaClient();
     const users = await prisma.user.findMany();
@@ -32,9 +30,9 @@ export class UserService {
         emailVerified: new Date(),
         name: data.name,
         password: hashedPassword,
-        workspace: "",
-        role: "USER",
-        account: "",
+        workspace: '',
+        role: 'USER',
+        account: '',
         apiToken: uuidv4(), // generate a new uuidv4 as api token
       },
     });
@@ -54,7 +52,7 @@ export class UserService {
 
   async deleteUser(id: string) {
     const prisma = new PrismaClient();
-    await prisma.user.delete({
+    return await prisma.user.delete({
       where: { id },
     });
   }
