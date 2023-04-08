@@ -4,16 +4,18 @@ FROM docker.io/node:lts-alpine as deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /usr/src/app
 COPY dist/apps/frontend/package*.json ./
-RUN npm install --only=production
+RUN yarn install
+RUN yarn build
 
 # Production image, copy all the files and run next
 FROM docker.io/node:lts-alpine as runner
 RUN apk add --no-cache dumb-init
+RUN yarn build
 ENV NODE_ENV production
 ENV PORT 3000
 WORKDIR /usr/src/app
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=deps /usr/src/app/package.json ./package.json
+COPY package.json ./package.json
 COPY dist/apps/frontend/public ./public
 COPY dist/apps/frontend/.next ./.next
 RUN chown -R node:node .
