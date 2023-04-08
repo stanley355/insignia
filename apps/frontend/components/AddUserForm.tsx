@@ -25,8 +25,7 @@ const AddUserForm = () => {
     });
     
     if (res && res.data) {
-        console.log(res.data);
-        // window.location.reload();
+        window.location.reload();
     }
     resetForm();
   };
