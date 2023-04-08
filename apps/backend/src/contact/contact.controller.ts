@@ -15,7 +15,7 @@ export class ContactController {
 
   @Post()
   async create(@Body() data) {
-    return this.contactService.create(data);
+    return this.contactService.create(JSON.parse(data.body));
   }
 
   @Get()
