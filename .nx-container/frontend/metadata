@@ -1,0 +1,25 @@
+{
+  "containerimage.buildinfo": {
+    "frontend": "dockerfile.v0",
+    "attrs": {
+      "filename": "Dockerfile",
+      "label:org.opencontainers.image.created": "2023-04-08T07:03:47.966Z",
+      "label:org.opencontainers.image.description": "",
+      "label:org.opencontainers.image.licenses": "",
+      "label:org.opencontainers.image.revision": "6b40fda73e04041cf4f37a54df7644d9a5a562a1",
+      "label:org.opencontainers.image.source": "",
+      "label:org.opencontainers.image.title": "",
+      "label:org.opencontainers.image.url": "",
+      "label:org.opencontainers.image.version": "main"
+    },
+    "sources": [
+      {
+        "type": "docker-image",
+        "ref": "docker.io/library/node:lts-alpine",
+        "pin": "sha256:47d97b93629d9461d64197773966cc49081cf4463b1b07de5a38b6bd5acfbe9d"
+      }
+    ]
+  },
+  "containerimage.config.digest": "sha256:a6ff9a65cf477fffe7f561191ca6afabec8d06d3bc339ceca9e369e29862d37d",
+  "containerimage.digest": "sha256:a6ff9a65cf477fffe7f561191ca6afabec8d06d3bc339ceca9e369e29862d37d"
+}
