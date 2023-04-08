@@ -7,56 +7,75 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
 } from 'reactflow';
+import axios from 'axios';
 
-// import { nodes as initialNodes, edges as initialEdges } from './initial-elements';
-// import CustomNode from './CustomNode';
+import {
+  nodes as initialNodes,
+  edges as initialEdges,
+} from '../components/flowConstant';
 
-// import 'reactflow/dist/style.css';
-// import './overview.css';
+import 'reactflow/dist/style.css';
 
-// const nodeTypes = {
-//   custom: CustomNode,
-// };
+const minimapStyle = {
+  height: 120,
+};
 
-// const minimapStyle = {
-//   height: 120,
-// };
+const onInit = (reactFlowInstance) =>
+  console.log('flow loaded:', reactFlowInstance);
 
-// const onInit = (reactFlowInstance) => console.log('flow loaded:', reactFlowInstance);
+const OverviewFlow = ({ users }) => {
+  const userNodes: any = users.map((user, index) => ({
+    id: String(index),
+    type: 'default',
+    data: {
+      label: user.email,
+    },
+    position: { x: 250, y: index * 100 },
+  }));
 
-// const OverviewFlow = () => {
-//   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-//   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-//   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+  const userEdges: any = users.map((user, index) => ({
+    id: 'e1-3',
+    source: '1',
+    target: String(index),
+    animated: true,
+  }));
 
-//   // we are using a bit of a shortcut here to adjust the edge type
-//   // this could also be done with a custom edge for example
-//   const edgesWithUpdatedTypes = edges.map((edge) => {
-//     if (edge.sourceHandle) {
-//       const edgeType = nodes.find((node) => node.type === 'custom').data.selects[edge.sourceHandle];
-//       edge.type = edgeType;
-//     }
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    userNodes.length > 0 ? userNodes : initialNodes
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    userEdges.length > 0 ? userEdges : initialEdges
+  );
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    []
+  );
 
-//     return edge;
-//   });
+  return (
+    <div className="container mx-auto">
+      <div className="w-full h-80">
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onConnect={onConnect}
+          onInit={onInit}
+          fitView
+        >
+          <MiniMap style={minimapStyle} zoomable pannable />
+        </ReactFlow>
+      </div>
+    </div>
+  );
+};
 
-//   return (
-//     <ReactFlow
-//       nodes={nodes}
-//       edges={edgesWithUpdatedTypes}
-//       onNodesChange={onNodesChange}
-//       onEdgesChange={onEdgesChange}
-//       onConnect={onConnect}
-//       onInit={onInit}
-//       fitView
-//       attributionPosition="top-right"
-//       nodeTypes={nodeTypes}
-//     >
-//       <MiniMap style={minimapStyle} zoomable pannable />
-//       <Controls />
-//       <Background color="#aaa" gap={16} />
-//     </ReactFlow>
-//   );
-// };
+export default OverviewFlow;
+export const getStaticProps = async () => {
+  const users: any = await axios.get(`${process.env.FRONTEND_URL}api/users/`);
 
-// export default OverviewFlow;
+  return {
+    props: {
+      users: users.data,
+    },
+  };
+};
