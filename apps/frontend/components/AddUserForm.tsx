@@ -18,9 +18,6 @@ const AddUserForm = () => {
   const handleSubmit = async (values, { resetForm }) => {
     const res = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URL}api/users/`, {
       method: 'POST',
-      headers: {
-        'api-token': 'abc'
-      },
       body: JSON.stringify(values),
     });
     

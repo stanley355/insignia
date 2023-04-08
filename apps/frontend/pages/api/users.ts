@@ -26,7 +26,7 @@ const userhandler = async (req, res) => {
       break;
     case 'DELETE':
       const delRes = await axios.delete(
-        `${USER_ENDPOINT}${req.body.id}`,
+        `${USER_ENDPOINT}${req.query.id}`,
         config
       );
       res.json(delRes.data);
