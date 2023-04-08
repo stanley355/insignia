@@ -1,0 +1,28 @@
+{
+  "projects": {
+    "backend": {
+      "architect": {
+        "docker": {
+          "builder": "@nrwl/docker:build",
+          "options": {
+            "outputPath": "dist/apps/backend",
+            "dockerFile": "apps/backend/Dockerfile",
+            "push": true
+          }
+        }
+      }
+    },
+    "frontend": {
+      "architect": {
+        "docker": {
+          "builder": "@nrwl/docker:build",
+          "options": {
+            "outputPath": "dist/apps/frontend",
+            "dockerFile": "apps/frontend/Dockerfile",
+            "push": true
+          }
+        }
+      }
+    }
+  }
+}
