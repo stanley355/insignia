@@ -9,7 +9,7 @@ const UsersPage = ({ users }) => {
           <h1 className="text-lg font-bold">Users</h1>
           <ul>
             {users.map((user) => (
-              <li key={user.id}>
+              <li key={user.id} className='border border-black px-2 mb-2'>
                 {user.name} ({user.email})
               </li>
             ))}

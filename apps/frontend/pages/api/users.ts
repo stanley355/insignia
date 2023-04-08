@@ -17,7 +17,7 @@ const userhandler = async (req, res) => {
       res.json(getRes.data);
       break;
     case 'POST':
-      const postRes = await axios.post(USER_ENDPOINT, config);
+      const postRes = await axios.post(USER_ENDPOINT, req.body, config);
       res.json(postRes.data);
       break;
     case 'PUT':

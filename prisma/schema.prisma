@@ -25,7 +25,6 @@ model User {
   name           String
   password       String
   workspace      String
-  workspaceId    String       @unique
   role           UserRoleEnum
   session        DateTime     @updatedAt
   account        String

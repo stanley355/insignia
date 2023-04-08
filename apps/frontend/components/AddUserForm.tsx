@@ -6,16 +6,21 @@ const AddUserForm = () => {
   const initialValues = {
     name: '',
     email: '',
+    password: "",
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string().required("Wajib password")
   });
 
   const handleSubmit = async (values, { resetForm }) => {
-    const res = await axios.post(`${process.env.FRONTEND_URL}api/users/`, {
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URL}api/users/`, {
       method: 'POST',
+      headers: {
+        'api-token': 'abc'
+      },
       body: JSON.stringify(values),
     });
     
@@ -38,13 +43,18 @@ const AddUserForm = () => {
           <Form>
             <div className='mb-2'>
               <label htmlFor="name">Name</label>
-              <Field type="text" name="name" id="name" className="border border-black rounded ml-2" />
+              <Field type="text" name="name" id="name" className="px-2 border border-black rounded ml-2" />
               <ErrorMessage name="name" component="div" className='text-red-500' />
             </div>
             <div className='mb-2'>
               <label htmlFor="email">Email</label>
-              <Field type="email" name="email" id="email" className="border border-black rounded ml-2" />
+              <Field type="email" name="email" id="email" className="px-2 border border-black rounded ml-2" />
               <ErrorMessage name="email" component="div" className='text-red-400'/>
+            </div>
+            <div className='mb-2'>
+              <label htmlFor="password">Password</label>
+              <Field type="password" name="password" id="password" className="px-2 border border-black rounded ml-2" />
+              <ErrorMessage name="password" component="div" className='text-red-400'/>
             </div>
             <button type="submit" className='w-full border rounded text-lg'>Add</button>
           </Form>
